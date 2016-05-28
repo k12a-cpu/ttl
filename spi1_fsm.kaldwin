@@ -1,0 +1,36 @@
+input spi1_begin;
+input spi1_counter_zero;
+input spi1_data_io_store;
+input spi1_sck;
+input spi1_state;
+
+output spi1_counter_tick;
+output spi1_data_sel;
+output spi1_data_store;
+output spi1_next_state;
+
+spi1_counter_tick = 1'h0;
+spi1_data_store = 1'h0;
+
+if (~spi1_state) {
+    spi1_next_state = 1'h0;
+    if (spi1_data_io_store) {
+        spi1_data_sel = 1'h0;
+        spi1_data_store = 1'h1;
+    }
+    if (spi1_begin) {
+        spi1_counter_tick = 1'h1;
+        spi1_next_state = 1'h1;
+    }
+} else {
+    spi1_next_state = 1'h1;
+    if (spi1_sck) {
+        spi1_data_sel = 1'h1;
+        spi1_data_store = 1'h1;
+    }
+    if (spi1_counter_zero) {
+        spi1_next_state = 1'h0;
+    } else {
+        spi1_counter_tick = 1'h1;
+    }
+}

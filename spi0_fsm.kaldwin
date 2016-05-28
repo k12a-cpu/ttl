@@ -1,0 +1,36 @@
+input spi0_begin;
+input spi0_counter_zero;
+input spi0_data_io_store;
+input spi0_sck;
+input spi0_state;
+
+output spi0_counter_tick;
+output spi0_data_sel;
+output spi0_data_store;
+output spi0_next_state;
+
+spi0_counter_tick = 1'h0;
+spi0_data_store = 1'h0;
+
+if (~spi0_state) {
+    spi0_next_state = 1'h0;
+    if (spi0_data_io_store) {
+        spi0_data_sel = 1'h0;
+        spi0_data_store = 1'h1;
+    }
+    if (spi0_begin) {
+        spi0_counter_tick = 1'h1;
+        spi0_next_state = 1'h1;
+    }
+} else {
+    spi0_next_state = 1'h1;
+    if (spi0_sck) {
+        spi0_data_sel = 1'h1;
+        spi0_data_store = 1'h1;
+    }
+    if (spi0_counter_zero) {
+        spi0_next_state = 1'h0;
+    } else {
+        spi0_counter_tick = 1'h1;
+    }
+}
