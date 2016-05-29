@@ -1,0 +1,19 @@
+# This file defines the nodes that connect all other modules together.
+# Essentially, these nodes are global to all files, while nodes defined in the
+# other files themselves are local to their defining file only. This
+# distinction is not enforced by the compiler, however.
+
+# System buses
+node addr_bus:              bits[16];
+
+# Data signals
+node c:                     bits[8];
+node d:                     bits[8];
+node inst:                  bits[16];
+node pc:                    bits[16];
+node sp:                    bits[16];
+
+# Control signals
+node acu_input1_sel:        bits[2];
+node acu_input2_sel:        bits[2];
+node acu_load_n:            bit;
