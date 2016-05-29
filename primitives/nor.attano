@@ -16,7 +16,7 @@ primitive NOR[4] (in0: bits[4],
     pin 11 => in0[3];
     pin 12 => in1[3];
     pin 13 => out[3];
-    pin 14 => Vcc;
+    pin 14 => VCC;
 }
 
 composite NOR[8] (in0: bits[8],
