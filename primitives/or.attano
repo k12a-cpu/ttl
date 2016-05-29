@@ -9,14 +9,14 @@ primitive OR[4] (in0: bits[4],
     pin 4  => in0[1];
     pin 5  => in1[1];
     pin 6  => out[1];
-    pin 7  => GND;
+    pin 7  => 1'b0;  # ground
     pin 8  => out[2];
     pin 9  => in0[2];
     pin 10 => in1[2];
     pin 11 => out[3];
     pin 12 => in0[3];
     pin 13 => in1[3];
-    pin 14 => VCC;
+    pin 14 => 1'b1;  # vcc
 }
 
 composite OR[8] (in0: bits[8],
