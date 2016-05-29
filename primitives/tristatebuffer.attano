@@ -1,0 +1,41 @@
+primitive TriStateBuffer[8] (in: bits[8],
+                             out: bits[8],
+                             enable_n: bit) {
+    device "74244";
+    footprint "DIP20";
+    pin 1  => enable_n;
+    pin 2  => in[0];
+    pin 3  => out[4];
+    pin 4  => in[1];
+    pin 5  => out[5];
+    pin 6  => in[2];
+    pin 7  => out[6];
+    pin 8  => in[3];
+    pin 9  => out[7];
+    pin 10 => 1'h0;  # ground
+    pin 11 => in[7];
+    pin 12 => out[3];
+    pin 13 => in[6];
+    pin 14 => out[2];
+    pin 15 => in[5];
+    pin 16 => out[1];
+    pin 17 => in[4];
+    pin 18 => out[0];
+    pin 19 => enable_n;
+    pin 20 => 1'h1;  # vcc
+}
+
+composite TriStateBuffer[16] (in: bits[16],
+                              out: bits[16],
+                              enable_n: bit) {
+    create lower8: TriStateBuffer[8] (
+        in => in[7:0],
+        out => out[7:0],
+        enable_n => enable_n,
+    );
+    create upper8: TriStateBuffer[8] (
+        in => in[15:8],
+        out => out[15:8],
+        enable_n => enable_n,
+    );
+}
