@@ -19,7 +19,7 @@ primitive Mux8[1] (in0: bit,
     pin 5  => out;
     pin 6  => out_n;
     pin 7  => enable_n;
-    pin 8  => GND;
+    pin 8  => 1'h0;  # ground
     pin 9  => sel[2];
     pin 10 => sel[1];
     pin 11 => sel[0];
@@ -27,7 +27,7 @@ primitive Mux8[1] (in0: bit,
     pin 13 => in6;
     pin 14 => in5;
     pin 15 => in4;
-    pin 16 => Vcc;
+    pin 16 => 1'h1;  # vcc
 }
 
 composite Mux8[2] (in0: bits[2],
