@@ -5,8 +5,11 @@
 
 # System buses
 node addr_bus:              bits[16];
+node data_bus:              bits[8];
 
 # Data signals
+node a:                     bits[8];
+node b:                     bits[8];
 node c:                     bits[8];
 node d:                     bits[8];
 node inst:                  bits[16];
@@ -17,3 +20,7 @@ node sp:                    bits[16];
 node acu_input1_sel:        bits[2];
 node acu_input2_sel:        bits[2];
 node acu_load_n:            bit;
+node alu_load_n:            bit;
+node alu_operand_sel:       bit;
+node condition:             bit;
+node condition_n:           bit;
