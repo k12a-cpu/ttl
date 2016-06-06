@@ -41,7 +41,7 @@ composite Mux4[4] (in0: bits[4],
         sel => sel,
         enable_n => enable_n,
     );
-    create upper2: Mux2[2] (
+    create upper2: Mux4[2] (
         in0 => in0[3:2],
         in1 => in1[3:2],
         in2 => in2[3:2],
