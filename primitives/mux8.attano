@@ -1,4 +1,4 @@
-primitive Mux8[1] (in0: bit,
+composite Mux8[1] (in0: bit,
                    in1: bit,
                    in2: bit,
                    in3: bit,
@@ -10,24 +10,26 @@ primitive Mux8[1] (in0: bit,
                    out_n: bit,
                    sel: bits[3],
                    enable_n: bit) {
-    device "74151";
-    footprint "DIP16";
-    pin 1  => in3;
-    pin 2  => in2;
-    pin 3  => in1;
-    pin 4  => in0;
-    pin 5  => out;
-    pin 6  => out_n;
-    pin 7  => enable_n;
-    pin 8  => 1'h0;  # ground
-    pin 9  => sel[2];
-    pin 10 => sel[1];
-    pin 11 => sel[0];
-    pin 12 => in7;
-    pin 13 => in6;
-    pin 14 => in5;
-    pin 15 => in4;
-    pin 16 => 1'h1;  # vcc
+    primitive mux8 (
+        device "74151";
+        footprint "DIP16";
+        pin 1  => in3;
+        pin 2  => in2;
+        pin 3  => in1;
+        pin 4  => in0;
+        pin 5  => out;
+        pin 6  => out_n;
+        pin 7  => enable_n;
+        pin 8  => 1'h0;  # ground
+        pin 9  => sel[2];
+        pin 10 => sel[1];
+        pin 11 => sel[0];
+        pin 12 => in7;
+        pin 13 => in6;
+        pin 14 => in5;
+        pin 15 => in4;
+        pin 16 => 1'h1;  # vcc
+    );
 }
 
 composite Mux8[2] (in0: bits[2],
@@ -42,7 +44,7 @@ composite Mux8[2] (in0: bits[2],
                    out_n: bits[2],
                    sel: bits[3],
                    enable_n: bit) {
-    create lower1: Mux8[1] (
+    instance lower1: Mux8[1] (
         in0 => in0[0],
         in1 => in1[0],
         in2 => in2[0],
@@ -56,7 +58,7 @@ composite Mux8[2] (in0: bits[2],
         sel => sel,
         enable_n => enable_n,
     );
-    create upper1: Mux8[1] (
+    instance upper1: Mux8[1] (
         in0 => in0[1],
         in1 => in1[1],
         in2 => in2[1],
@@ -84,7 +86,7 @@ composite Mux8[4] (in0: bits[4],
                    out_n: bits[4],
                    sel: bits[3],
                    enable_n: bit) {
-    create lower2: Mux8[2] (
+    instance lower2: Mux8[2] (
         in0 => in0[1:0],
         in1 => in1[1:0],
         in2 => in2[1:0],
@@ -98,7 +100,7 @@ composite Mux8[4] (in0: bits[4],
         sel => sel,
         enable_n => enable_n,
     );
-    create upper2: Mux8[2] (
+    instance upper2: Mux8[2] (
         in0 => in0[3:2],
         in1 => in1[3:2],
         in2 => in2[3:2],
@@ -126,7 +128,7 @@ composite Mux8[8] (in0: bits[8],
                    out_n: bits[8],
                    sel: bits[3],
                    enable_n: bit) {
-    create lower4: Mux8[4] (
+    instance lower4: Mux8[4] (
         in0 => in0[3:0],
         in1 => in1[3:0],
         in2 => in2[3:0],
@@ -140,7 +142,7 @@ composite Mux8[8] (in0: bits[8],
         sel => sel,
         enable_n => enable_n,
     );
-    create upper4: Mux8[4] (
+    instance upper4: Mux8[4] (
         in0 => in0[7:4],
         in1 => in1[7:4],
         in2 => in2[7:4],
@@ -168,7 +170,7 @@ composite Mux8[16] (in0: bits[16],
                     out_n: bits[16],
                     sel: bits[3],
                     enable_n: bit) {
-    create lower8: Mux8[8] (
+    instance lower8: Mux8[8] (
         in0 => in0[7:0],
         in1 => in1[7:0],
         in2 => in2[7:0],
@@ -182,7 +184,7 @@ composite Mux8[16] (in0: bits[16],
         sel => sel,
         enable_n => enable_n,
     );
-    create upper8: Mux8[8] (
+    instance upper8: Mux8[8] (
         in0 => in0[15:8],
         in1 => in1[15:8],
         in2 => in2[15:8],

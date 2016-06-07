@@ -1,37 +1,39 @@
 # 32768 byte asynchronous RAM
-primitive AsyncRAM (addr: bits[15],
+composite AsyncRAM (addr: bits[15],
                     data: bits[8],
                     chip_enable_n: bit,
                     output_enable_n: bit,
                     write_enable_n: bit) {
-    device "62256";
-    footprint "WDIP28";
-    pin 1  => addr[14];
-    pin 2  => addr[12];
-    pin 3  => addr[7];
-    pin 4  => addr[6];
-    pin 5  => addr[5];
-    pin 6  => addr[4];
-    pin 7  => addr[3];
-    pin 8  => addr[2];
-    pin 9  => addr[1];
-    pin 10 => addr[0];
-    pin 11 => data[0];
-    pin 12 => data[1];
-    pin 13 => data[2];
-    pin 14 => 1'h0;  # ground
-    pin 15 => data[3];
-    pin 16 => data[4];
-    pin 17 => data[5];
-    pin 18 => data[6];
-    pin 19 => data[7];
-    pin 20 => chip_enable_n;
-    pin 21 => addr[10];
-    pin 22 => output_enable_n;
-    pin 23 => addr[11];
-    pin 24 => addr[9];
-    pin 25 => addr[8];
-    pin 26 => addr[13];
-    pin 27 => write_enable_n;
-    pin 28 => 1'h1;  # vcc
+    primitive asyncram (
+        device "62256";
+        footprint "WDIP28";
+        pin 1  => addr[14];
+        pin 2  => addr[12];
+        pin 3  => addr[7];
+        pin 4  => addr[6];
+        pin 5  => addr[5];
+        pin 6  => addr[4];
+        pin 7  => addr[3];
+        pin 8  => addr[2];
+        pin 9  => addr[1];
+        pin 10 => addr[0];
+        pin 11 => data[0];
+        pin 12 => data[1];
+        pin 13 => data[2];
+        pin 14 => 1'h0;  # ground
+        pin 15 => data[3];
+        pin 16 => data[4];
+        pin 17 => data[5];
+        pin 18 => data[6];
+        pin 19 => data[7];
+        pin 20 => chip_enable_n;
+        pin 21 => addr[10];
+        pin 22 => output_enable_n;
+        pin 23 => addr[11];
+        pin 24 => addr[9];
+        pin 25 => addr[8];
+        pin 26 => addr[13];
+        pin 27 => write_enable_n;
+        pin 28 => 1'h1;  # vcc
+    );
 }

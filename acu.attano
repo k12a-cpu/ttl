@@ -6,7 +6,7 @@ node acu_output: bits[16];
 
 alias rel_offset = {{4 x inst[10]}, inst[10:0], 1'h0};
 
-create acu_input1_mux: Mux4[16] (
+instance acu_input1_mux: Mux4[16] (
     in0 => pc,
     in1 => {c, d},
     in2 => sp,
@@ -16,7 +16,7 @@ create acu_input1_mux: Mux4[16] (
     enable_n => 1'h0,  # always active
 );
 
-create acu_input2_mux: Mux4[16] (
+instance acu_input2_mux: Mux4[16] (
     in0 => rel_offset,
     in1 => 16'h0001,
     in2 => 16'h0002,
@@ -26,7 +26,7 @@ create acu_input2_mux: Mux4[16] (
     enable_n => 1'h0,  # always active
 );
 
-create acu_adder: Adder[16] (
+instance acu_adder: Adder[16] (
     in0 => acu_input1,
     in1 => acu_input2,
     out => acu_output,
@@ -34,7 +34,7 @@ create acu_adder: Adder[16] (
     carry_out => DISCONNECTED,
 );
 
-create acu_output_tsb: TriStateBuffer[16] (
+instance acu_output_tsb: TriStateBuffer[16] (
     in => acu_output,
     out => addr_bus,
     enable_n => acu_load_n,

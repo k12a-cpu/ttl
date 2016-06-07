@@ -3,7 +3,7 @@
 alias alu_input1 = a;
 node alu_input2: bits[8];
 
-create alu_input2_mux: Mux2[8] (
+instance alu_input2_mux: Mux2[8] (
     in0 => b,
     in1 => inst[7:0],
     out => alu_input2,
@@ -18,7 +18,7 @@ alias alu_subtract = inst[8];
 alias alu_adder_input1 = alu_input1;
 node alu_adder_input2: bits[8];
 
-create alu_adder_input2_xor: XOR[8] (
+instance alu_adder_input2_xor: XOR[8] (
     in0 => alu_input2,
     in1 => {8 x alu_subtract},
     out => alu_adder_input2,
@@ -28,7 +28,7 @@ alias alu_adder_carry_in = alu_subtract;
 node alu_adder_out: bits[8];
 node alu_adder_carry_out: bit;
 
-create alu_adder: Adder[8] (
+instance alu_adder: Adder[8] (
     in0 => alu_adder_input1,
     in1 => alu_adder_input2,
     out => alu_adder_out,
@@ -45,19 +45,19 @@ node alu_and_out: bits[8];
 node alu_or_out: bits[8];
 node alu_xor_out: bits[8];
 
-create alu_and: AND[8] (
+instance alu_and: AND[8] (
     in0 => alu_input1,
     in1 => alu_input2,
     out => alu_and_out,
 );
 
-create alu_or: OR[8] (
+instance alu_or: OR[8] (
     in0 => alu_input1,
     in1 => alu_input2,
     out => alu_or_out,
 );
 
-create alu_xor: XOR[8] (
+instance alu_xor: XOR[8] (
     in0 => alu_input1,
     in1 => alu_input2,
     out => alu_xor_out,
@@ -68,7 +68,7 @@ create alu_xor: XOR[8] (
 
 node alu_output: bits[8];
 
-create alu_output_mux: Mux8[8] (
+instance alu_output_mux: Mux8[8] (
     in0 => alu_input1,
     in1 => alu_and_out,
     in2 => alu_or_out,
@@ -86,7 +86,7 @@ create alu_output_mux: Mux8[8] (
 # Condition logic
 # See also: alu_condition_logic.kaldwin
 
-create alu_condition_mux: Mux8[1] (
+instance alu_condition_mux: Mux8[1] (
     in0 => zero,
     in1 => negative,
     in2 => borrow,
@@ -104,7 +104,7 @@ create alu_condition_mux: Mux8[1] (
 
 # Data bus output
 
-create alu_output_tsb: TriStateBuffer[8] (
+instance alu_output_tsb: TriStateBuffer[8] (
     in => alu_output,
     out => data_bus,
     enable_n => alu_load_n,
