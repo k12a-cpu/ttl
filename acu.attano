@@ -31,7 +31,7 @@ instance acu_adder: Adder[16] (
     in1 => acu_input2,
     out => acu_output,
     carry_in => 1'h0,
-    carry_out => DISCONNECTED,
+    carry_out => disconnected,
 );
 
 instance acu_output_tsb: TriStateBuffer[16] (
