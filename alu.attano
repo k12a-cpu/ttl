@@ -1,90 +1,82 @@
-# Inputs
-
 alias alu_input1 = a;
 node alu_input2: bits[8];
+node alu_output: bits[8];
+
+alias adder_input1 = alu_input1;
+node adder_input2: bits[8];
+alias adder_carry_in = subtract;
+node adder_output: bits[8];
+node adder_carry_out: bit;
+
+alias inst_8 = inst[8];
+alias adder_input1_7 = adder_input1[7];
+alias adder_input2_7 = adder_input2[7];
+
+node alu_and_output: bits[8];
+node alu_or_output: bits[8];
+node alu_xor_output: bits[8];
+alias alu_shift_output = {alu_input1[7], alu_input1[7:1]};
 
 instance alu_input2_mux: Mux2[8] (
     in0 => b,
     in1 => inst[7:0],
     out => alu_input2,
     sel => alu_operand_sel,
-    enable_n => 1'h0,  # always active
+    enable_n => 1'h0, # always enabled
 );
-
-
-# Adder
-
-alias alu_subtract = inst[8];
-alias alu_adder_input1 = alu_input1;
-node alu_adder_input2: bits[8];
 
 instance alu_adder_input2_xor: XOR[8] (
     in0 => alu_input2,
-    in1 => {8 x alu_subtract},
-    out => alu_adder_input2,
+    in1 => {8 x subtract},
+    out => adder_input2,
 );
-
-alias alu_adder_carry_in = alu_subtract;
-node alu_adder_out: bits[8];
-node alu_adder_carry_out: bit;
 
 instance alu_adder: Adder[8] (
-    in0 => alu_adder_input1,
-    in1 => alu_adder_input2,
-    out => alu_adder_out,
-    carry_in => alu_adder_carry_in,
-    carry_out => alu_adder_carry_out,
+    in0 => adder_input1,
+    in1 => adder_input2,
+    out => adder_output,
+    carry_in => adder_carry_in,
+    carry_out => adder_carry_out,
 );
-
-
-# Logic functions
-
-alias alu_rshift_out = {alu_input1[7], alu_input1[7:1]};
-
-node alu_and_out: bits[8];
-node alu_or_out: bits[8];
-node alu_xor_out: bits[8];
 
 instance alu_and: AND[8] (
     in0 => alu_input1,
     in1 => alu_input2,
-    out => alu_and_out,
+    out => alu_and_output,
 );
 
 instance alu_or: OR[8] (
     in0 => alu_input1,
     in1 => alu_input2,
-    out => alu_or_out,
+    out => alu_or_output,
 );
 
 instance alu_xor: XOR[8] (
     in0 => alu_input1,
     in1 => alu_input2,
-    out => alu_xor_out,
+    out => alu_xor_output,
 );
-
-
-# Output mux
-
-node alu_output: bits[8];
 
 instance alu_output_mux: Mux8[8] (
     in0 => alu_input1,
-    in1 => alu_and_out,
-    in2 => alu_or_out,
-    in3 => alu_xor_out,
-    in4 => alu_adder_out,
-    in5 => alu_adder_out,
-    in6 => alu_rshift_out,
+    in1 => alu_and_output,
+    in2 => alu_or_output,
+    in3 => alu_xor_output,
+    in4 => adder_output,
+    in5 => adder_output,
+    in6 => alu_shift_output,
     in7 => alu_input2,
     out => alu_output,
+    out_n => {8 x disconnected},
     sel => inst[10:8],
-    enable_n => 1'h0,  # always active
+    enable_n => 1'h0, # always enabled
 );
 
-
-# Condition logic
-# See also: alu_condition_logic.kaldwin
+instance alu_output_tsb: TriStateBuffer[8] (
+    in => alu_output,
+    out => data_bus,
+    enable_n => alu_load_n,
+);
 
 instance alu_condition_mux: Mux8[1] (
     in0 => zero,
@@ -95,17 +87,8 @@ instance alu_condition_mux: Mux8[1] (
     in5 => ule,
     in6 => slt,
     in7 => sle,
-    out => condition,
-    out_n => condition_n,
+    out => alu_condition,
+    out_n => alu_condition_n,
     sel => inst[10:8],
-    enable_n => 1'h0,  # always active
-);
-
-
-# Data bus output
-
-instance alu_output_tsb: TriStateBuffer[8] (
-    in => alu_output,
-    out => data_bus,
-    enable_n => alu_load_n,
+    enable_n => 1'h0, # always enabled
 );

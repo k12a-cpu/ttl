@@ -1,0 +1,32 @@
+node inst_high_input: bits[8];
+node inst_low_input: bits[8];
+
+instance inst_high_input_mux: Mux2[8] (
+    in0 => inst_high,
+    in1 => data_bus,
+    out => inst_high_input,
+    sel => inst_high_store,
+    enable_n => 1'h0, # always enabled
+);
+
+instance inst_high_reg: Register[8] (
+    in => inst_high_input,
+    out => inst_high,
+    clock => clock,
+    reset_n => reset_n,
+);
+
+instance inst_low_input_mux: Mux2[8] (
+    in0 => inst_low,
+    in1 => data_bus,
+    out => inst_low_input,
+    sel => inst_low_store,
+    enable_n => 1'h0, # always enabled
+);
+
+instance inst_low_reg: Register[8] (
+    in => inst_low_input,
+    out => inst_low,
+    clock => clock,
+    reset_n => reset_n,
+);

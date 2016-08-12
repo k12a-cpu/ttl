@@ -1,0 +1,107 @@
+node a_input: bits[8];
+node b_input: bits[8];
+node c_input: bits[8];
+node d_input: bits[8];
+
+node c_next: bits[8];
+node d_next: bits[8];
+
+instance a_input_mux: Mux2[8] (
+    in0 => a,
+    in1 => data_bus,
+    out => a_input,
+    sel => a_store,
+    enable_n => 1'h0, # always enabled
+);
+
+instance a_reg: Register[8] (
+    in => a_input,
+    out => a,
+    clock => clock,
+    reset_n => reset_n,
+);
+
+instance a_tsb: TriStateBuffer[8] (
+    in => a,
+    out => data_bus,
+    enable_n => a_load_n,
+);
+
+instance b_input_mux: Mux2[8] (
+    in0 => b,
+    in1 => data_bus,
+    out => b_input,
+    sel => b_store,
+    enable_n => 1'h0, # always enabled
+);
+
+instance b_reg: Register[8] (
+    in => b_input,
+    out => b,
+    clock => clock,
+    reset_n => reset_n,
+);
+
+instance c_next_mux: Mux2[8] (
+    in0 => data_bus,
+    in1 => addr_bus[15:8],
+    out => c_next,
+    sel => cd_sel,
+    enable_n => 1'h0, # always enabled
+);
+
+instance c_input_mux: Mux2[8] (
+    in0 => c,
+    in1 => c_next,
+    out => c_input,
+    sel => c_store,
+    enable_n => 1'h0, # always enabled
+);
+
+instance c_reg: Register[8] (
+    in => c_input,
+    out => c,
+    clock => clock,
+    reset_n => reset_n,
+);
+
+instance c_tsb: TriStateBuffer[8] (
+    in => c,
+    out => data_bus,
+    enable_n => c_load_n,
+);
+
+instance d_next_mux: Mux2[8] (
+    in0 => data_bus,
+    in1 => addr_bus[7:0],
+    out => d_next,
+    sel => cd_sel,
+    enable_n => 1'h0, # always enabled
+);
+
+instance d_input_mux: Mux2[8] (
+    in0 => d,
+    in1 => d_next,
+    out => d_input,
+    sel => d_store,
+    enable_n => 1'h0, # always enabled
+);
+
+instance d_reg: Register[8] (
+    in => d_input,
+    out => d,
+    clock => clock,
+    reset_n => reset_n,
+);
+
+instance d_tsb: TriStateBuffer[8] (
+    in => d,
+    out => data_bus,
+    enable_n => d_load_n,
+);
+
+instance cd_tsb: TriStateBuffer[16] (
+    in => {c, d},
+    out => addr_bus,
+    enable_n => cd_load_n,
+);

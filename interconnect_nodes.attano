@@ -1,26 +1,42 @@
-# This file defines the nodes that connect all other modules together.
-# Essentially, these nodes are global to all files, while nodes defined in the
-# other files themselves are local to their defining file only. This
-# distinction is not enforced by the compiler, however.
+# System timing signals:
+node clock:             bit;
+node reset_n:           bit;
+node async_write:       bit;
 
-# System buses
-node addr_bus:              bits[16];
-node data_bus:              bits[8];
+# System buses:
+node addr_bus:          bits[16];
+node data_bus:          bits[8];
 
-# Data signals
-node a:                     bits[8];
-node b:                     bits[8];
-node c:                     bits[8];
-node d:                     bits[8];
-node inst:                  bits[16];
-node pc:                    bits[16];
-node sp:                    bits[16];
+# Registers:
+node a:                 bits[8];
+node b:                 bits[8];
+node c:                 bits[8];
+node d:                 bits[8];
+node pc:                bits[16];
+node sp:                bits[16];
+node inst_high:         bits[8];
+node inst_low:          bits[8];
 
-# Control signals
-node acu_input1_sel:        bits[2];
-node acu_input2_sel:        bits[2];
-node acu_load_n:            bit;
-node alu_load_n:            bit;
-node alu_operand_sel:       bit;
-node condition:             bit;
-node condition_n:           bit;
+# Control signals:
+node a_load_n:          bit;
+node a_store:           bit;
+node b_store:           bit;
+node c_load_n:          bit;
+node c_store:           bit;
+node cd_load_n:         bit;
+node cd_sel:            bit;
+node d_load_n:          bit;
+node d_store:           bit;
+node acu_input1_sel:    bits[2];
+node acu_input2_sel:    bits[2];
+node acu_load_n:        bit;
+node alu_load_n:        bit;
+node alu_operand_sel:   bit;
+node inst_high_store:   bit;
+node inst_low_store:    bit;
+node is_skip:           bit;
+
+node alu_condition:     bit;
+node alu_condition_n:   bit;
+
+alias inst = {inst_high, inst_low};

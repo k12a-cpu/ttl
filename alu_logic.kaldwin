@@ -1,0 +1,28 @@
+input inst_8;
+input is_skip;
+output subtract;
+
+input adder_output[8];
+input adder_input1_7;
+input adder_input2_7;
+input adder_carry_out;
+
+output zero;
+output negative;
+output borrow;
+output overflow;
+output ult;
+output ule;
+output slt;
+output sle;
+
+subtract = inst_8 | is_skip;
+
+zero = adder_output == 8'h00;
+negative = adder_output[7];
+borrow = ~adder_carry_out;
+overflow = (adder_input1_7 ^ adder_output[7]) ^ (adder_input2_7 ^ adder_output[7]);
+ult = borrow;
+ule = ult | zero;
+slt = negative ^ overflow;
+sle = slt | zero;

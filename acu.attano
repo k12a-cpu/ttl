@@ -4,16 +4,16 @@ node acu_input1: bits[16];
 node acu_input2: bits[16];
 node acu_output: bits[16];
 
-alias rel_offset = {{4 x inst[10]}, inst[10:0], 1'h0};
+alias rel_offset = {{5 x inst[10]}, inst[10:0]};
 
 instance acu_input1_mux: Mux4[16] (
     in0 => pc,
     in1 => {c, d},
     in2 => sp,
-    in3 => 16'h0000,  # never used
+    in3 => 16'h0000, # not used
     out => acu_input1,
     sel => acu_input1_sel,
-    enable_n => 1'h0,  # always active
+    enable_n => 1'h0, # always enabled
 );
 
 instance acu_input2_mux: Mux4[16] (
@@ -23,7 +23,7 @@ instance acu_input2_mux: Mux4[16] (
     in3 => 16'hFFFF,
     out => acu_input2,
     sel => acu_input2_sel,
-    enable_n => 1'h0,  # always active
+    enable_n => 1'h0, # always enabled
 );
 
 instance acu_adder: Adder[16] (
