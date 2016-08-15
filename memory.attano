@@ -1,0 +1,16 @@
+alias addr_bus_15 = addr_bus[15];
+
+instance rom: AsyncEEPROM (
+    addr => addr_bus[14:0],
+    data => data_bus,
+    chip_enable_n => rom_ce_n,
+    output_enable_n => oe_n,
+);
+
+instance ram: AsyncRAM (
+    addr => addr_bus[14:0],
+    data => data_bus,
+    chip_enable_n => ram_ce_n,
+    output_enable_n => oe_n,
+    write_enable_n => we_n,
+);

@@ -1,0 +1,22 @@
+node pc_input: bits[16];
+
+instance pc_input_mux: Mux2[16] (
+    in0 => pc,
+    in1 => addr_bus,
+    out => pc_input,
+    sel => pc_store,
+    enable_n => 1'h0, # always enabled
+);
+
+instance pc_reg: Register[16] (
+    in => pc_input,
+    out => pc,
+    clock => clock,
+    reset_n => reset_n,
+);
+
+instance pc_tsb: TriStateBuffer[16] (
+    in => pc,
+    out => addr_bus,
+    enable_n => pc_load_n,
+);

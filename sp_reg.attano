@@ -1,0 +1,22 @@
+node sp_input: bits[16];
+
+instance sp_input_mux: Mux2[16] (
+    in0 => sp,
+    in1 => addr_bus,
+    out => sp_input,
+    sel => sp_store,
+    enable_n => 1'h0, # always enabled
+);
+
+instance sp_reg: Register[16] (
+    in => sp_input,
+    out => sp,
+    clock => clock,
+    reset_n => reset_n,
+);
+
+instance sp_tsb: TriStateBuffer[16] (
+    in => sp,
+    out => addr_bus,
+    enable_n => sp_load_n,
+);
