@@ -1,5 +1,3 @@
-alias addr_bus_15 = addr_bus[15];
-
 instance rom: AsyncEEPROM (
     addr => addr_bus[14:0],
     data => data_bus,

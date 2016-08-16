@@ -1,20 +1,20 @@
-input mem_enable;
-input mem_mode;
-input addr_bus_15;
-input async_write;
+extern node mem_enable;
+extern node mem_mode;
+extern node addr_bus[16];
+extern node async_write;
 
-intermediate rom_ce;
-intermediate ram_ce;
-intermediate oe;
-intermediate we;
+transient node rom_ce;
+transient node ram_ce;
+transient node oe;
+transient node we;
 
-output rom_ce_n;
-output ram_ce_n;
-output oe_n;
-output we_n;
+extern node rom_ce_n;
+extern node ram_ce_n;
+extern node oe_n;
+extern node we_n;
 
-rom_ce = mem_enable & (addr_bus_15 == 1'h0);
-ram_ce = mem_enable & (addr_bus_15 == 1'h1);
+rom_ce = mem_enable & (addr_bus[15] == 1'h0);
+ram_ce = mem_enable & (addr_bus[15] == 1'h1);
 oe = mem_mode == 1'h0;
 we = (mem_mode == 1'h1) & async_write;
 

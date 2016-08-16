@@ -8,15 +8,20 @@ alias adder_carry_in = subtract;
 node adder_output: bits[8];
 node adder_carry_out: bit;
 
-alias inst_8 = inst[8];
-alias inst_11 = inst[11];
-alias adder_input1_7 = adder_input1[7];
-alias adder_input2_7 = adder_input2[7];
-
 node alu_and_output: bits[8];
 node alu_or_output: bits[8];
 node alu_xor_output: bits[8];
 alias alu_shift_output = {alu_input1[7], alu_input1[7:1]};
+
+node subtract: bit;
+node zero: bit;
+node negative: bit;
+node borrow: bit;
+node overflow: bit;
+node ult: bit;
+node ule: bit;
+node slt: bit;
+node sle: bit;
 
 instance alu_input2_mux: Mux2[8] (
     in0 => b,
