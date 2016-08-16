@@ -1,0 +1,47 @@
+node gpio_out0_load_n:  bit;
+node gpio_out1_load_n:  bit;
+node gpio_out2_load_n:  bit;
+node control_load_n:    bit;
+node gpio_in0_load_n:   bit;
+node gpio_in1_load_n:   bit;
+node gpio_in2_load_n:   bit;
+node spi_data_load_n:   bit;
+
+node gpio_out0_store_n: bit;
+node gpio_out1_store_n: bit;
+node gpio_out2_store_n: bit;
+node control_store_n:   bit;
+node sevenseg0_store_n: bit;
+node sevenseg1_store_n: bit;
+node lcd_data_store_n:  bit;
+node spi_data_store_n:  bit;
+
+instance io_load_demux: Decoder8[1] (
+    sel => io_addr,
+    out0_n => gpio_out0_load_n,
+    out1_n => gpio_out1_load_n,
+    out2_n => gpio_out2_load_n,
+    out3_n => control_load_n,
+    out4_n => gpio_in0_load_n,
+    out5_n => gpio_in1_load_n,
+    out6_n => gpio_in2_load_n,
+    out7_n => spi_data_load_n,
+    enable1_n => io_load_n,
+    enable2_n => 1'h0,
+    enable3 => 1'h1,
+);
+
+instance io_store_demux: Decoder8[1] (
+    sel => io_addr,
+    out0_n => gpio_out0_store_n,
+    out1_n => gpio_out1_store_n,
+    out2_n => gpio_out2_store_n,
+    out3_n => control_store_n,
+    out4_n => sevenseg0_store_n,
+    out5_n => sevenseg1_store_n,
+    out6_n => lcd_data_store_n,
+    out7_n => spi_data_store_n,
+    enable1_n => io_store_n,
+    enable2_n => 1'h0,
+    enable3 => 1'h1,
+);
