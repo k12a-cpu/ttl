@@ -16,7 +16,7 @@ alias alu_shift_output = {alu_input1[7], alu_input1[7:1]};
 node subtract: bit;
 node zero: bit;
 node negative: bit;
-node borrow: bit;
+node lsb: bit;
 node overflow: bit;
 node ult: bit;
 node ule: bit;
@@ -87,7 +87,7 @@ instance alu_output_tsb: TriStateBuffer[8] (
 instance alu_condition_mux: Mux8[1] (
     in0 => zero,
     in1 => negative,
-    in2 => borrow,
+    in2 => lsb,
     in3 => overflow,
     in4 => ult,
     in5 => ule,
