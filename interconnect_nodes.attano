@@ -36,7 +36,6 @@ node alu_load_n:        bit;
 node alu_operand_sel:   bit;
 node inst_high_store:   bit;
 node inst_low_store:    bit;
-node is_skip:           bit;
 node mem_enable:        bit;
 node mem_mode:          bit;
 node pc_load_n:         bit;

@@ -1,5 +1,5 @@
 input inst_8;
-input is_skip;
+input inst_11;
 output subtract;
 
 input adder_output[8];
@@ -16,7 +16,7 @@ output ule;
 output slt;
 output sle;
 
-subtract = inst_8 | is_skip;
+subtract = inst_8 | ~inst_11;
 
 zero = adder_output == 8'h00;
 negative = adder_output[7];

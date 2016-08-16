@@ -9,6 +9,7 @@ node adder_output: bits[8];
 node adder_carry_out: bit;
 
 alias inst_8 = inst[8];
+alias inst_11 = inst[11];
 alias adder_input1_7 = adder_input1[7];
 alias adder_input2_7 = adder_input2[7];
 
