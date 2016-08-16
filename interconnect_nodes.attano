@@ -12,10 +12,12 @@ node a:                 bits[8];
 node b:                 bits[8];
 node c:                 bits[8];
 node d:                 bits[8];
-node pc:                bits[16];
-node sp:                bits[16];
 node inst_high:         bits[8];
 node inst_low:          bits[8];
+node pc:                bits[16];
+node skip:              bit;
+node sp:                bits[16];
+node state:             bits[3];
 
 # Control signals:
 node a_load_n:          bit;
@@ -39,8 +41,10 @@ node mem_enable:        bit;
 node mem_mode:          bit;
 node pc_load_n:         bit;
 node pc_store:          bit;
+node skip_sel:          bits[2];
 node sp_load_n:         bit;
 node sp_store:          bit;
+node state_next:        bits[3];
 
 node alu_condition:     bit;
 node alu_condition_n:   bit;

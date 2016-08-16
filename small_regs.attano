@@ -1,0 +1,18 @@
+node skip_next: bit;
+
+instance skip_next_mux: Mux4[2] (
+    in0 => {1'h0, skip},
+    in1 => {1'h0, 1'h0},
+    in2 => {1'h0, alu_condition},
+    in3 => {1'h0, alu_condition_n},
+    out => {disconnected, skip_next},
+    sel => skip_sel,
+    enable_n => 1'h0, # always enabled
+);
+
+instance small_regs: Register[8] (
+    in => {4'h0, skip_next, state_next},
+    out => {{4 x disconnected}, skip, state},
+    clock => clock,
+    reset_n => reset_n,
+);
