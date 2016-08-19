@@ -49,5 +49,6 @@ node state_next:        bits[3];
 
 node alu_condition:     bit;
 node alu_condition_n:   bit;
+node wake:              bit;
 
 alias inst = {inst_high, inst_low};
