@@ -27,6 +27,7 @@ node acu_input2_sel:    bits[2];
 node acu_load_n:        bit;
 node alu_load_n:        bit;
 node alu_operand_sel:   bit;
+node alu_subtract:      bit;
 node b_store:           bit;
 node c_load_n:          bit;
 node c_store:           bit;
