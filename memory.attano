@@ -1,14 +1,14 @@
 instance rom: AsyncEEPROM (
     addr => addr_bus[14:0],
     data => data_bus,
-    chip_enable_n => rom_ce_n,
-    output_enable_n => oe_n,
+    chip_enable_n => mem_rom_ce_n,
+    output_enable_n => mem_oe_n,
 );
 
 instance ram: AsyncRAM (
     addr => addr_bus[14:0],
     data => data_bus,
-    chip_enable_n => ram_ce_n,
-    output_enable_n => oe_n,
-    write_enable_n => we_n,
+    chip_enable_n => mem_ram_ce_n,
+    output_enable_n => mem_oe_n,
+    write_enable_n => mem_we_n,
 );
