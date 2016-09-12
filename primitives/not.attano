@@ -1,0 +1,21 @@
+composite NOT[6] (in: bits[6],
+                  out: bits[6]) {
+    primitive not (
+        device "7404";
+        footprint "DIP14";
+        pin 1  => in[0];
+        pin 2  => out[0];
+        pin 3  => in[1];
+        pin 4  => out[1];
+        pin 5  => in[2];
+        pin 6  => out[2];
+        pin 7  => 1'b0;  # ground
+        pin 8  => out[3];
+        pin 9  => in[3];
+        pin 10 => out[4];
+        pin 11 => in[4];
+        pin 12 => out[5];
+        pin 13 => in[5];
+        pin 14 => 1'b1;  # vcc
+    );
+}
