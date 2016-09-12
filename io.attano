@@ -1,3 +1,5 @@
+alias io_addr = inst[2:0];
+
 node gpio_out0_load_n:  bit;
 node gpio_out1_load_n:  bit;
 node gpio_out2_load_n:  bit;
