@@ -13,6 +13,9 @@ node alu_or_output: bits[8];
 node alu_xor_output: bits[8];
 alias alu_shift_output = {alu_input1[7], alu_input1[7:1]};
 
+alias adder_input1_msb = adder_input1[7];
+alias adder_input2_msb = adder_input2[7];
+
 node zero: bit;
 node negative: bit;
 node lsb: bit;
