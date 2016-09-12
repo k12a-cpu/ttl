@@ -13,21 +13,21 @@ composite Decoder8[1] (sel: bits[3],
     primitive decoder8 (
         device "74138";
         footprint "DIP16";
-        pin 1  => sel[0],
-        pin 2  => sel[1],
-        pin 3  => sel[2],
-        pin 4  => enable1_n,
-        pin 5  => enable2_n,
-        pin 6  => enable3,
-        pin 7  => out7_n,
-        pin 8  => 1'h0,
-        pin 9  => out6_n,
-        pin 10 => out5_n,
-        pin 11 => out4_n,
-        pin 12 => out3_n,
-        pin 13 => out2_n,
-        pin 14 => out1_n,
-        pin 15 => out0_n,
-        pin 16 => 1'h1,
+        pin 1  => sel[0];
+        pin 2  => sel[1];
+        pin 3  => sel[2];
+        pin 4  => enable1_n;
+        pin 5  => enable2_n;
+        pin 6  => enable3;
+        pin 7  => out7_n;
+        pin 8  => 1'h0;
+        pin 9  => out6_n;
+        pin 10 => out5_n;
+        pin 11 => out4_n;
+        pin 12 => out3_n;
+        pin 13 => out2_n;
+        pin 14 => out1_n;
+        pin 15 => out0_n;
+        pin 16 => 1'h1;
     );
 }
